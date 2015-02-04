@@ -16,16 +16,16 @@ $services = json_decode(file_get_contents("services.json"));
 $service = $services->$id;
 
 // start
-$command = "launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist?" . $id;
+$command = "launchctl load -w ~/Library/LaunchDaemons/homebrew.mxcl.mysql.plist?" . $id;
 $w->result( "$id-start", $command, "Start {$service->name}", "Will run `$command` for you", "icons/{$service->id}.png" );
 
 // stop
-$command = "launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist?" . $id;
+$command = "launchctl unload -w ~/Library/LaunchDaemons/homebrew.mxcl.mysql.plist?" . $id;
 $w->result( "{$service->id}-stop", $command, "Stop {$service->name}", "Will run `$command` for you", "icons/{$service->id}.png" );
 
 // restart
-$command = "launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
-		."; launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist?" . $id;
+$command = "launchctl unload -w ~/Library/LaunchDaemons/homebrew.mxcl.mysql.plist"
+		."; launchctl load -w ~/Library/LaunchDaemons/homebrew.mxcl.mysql.plist?" . $id;
 $w->result( "{$service->id}-restart", $command, "Restart {$service->name}", "Will run `$command` for you", "icons/{$service->id}.png" );
 
 // status

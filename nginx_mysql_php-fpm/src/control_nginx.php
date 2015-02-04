@@ -16,16 +16,16 @@ $services = json_decode(file_get_contents("services.json"));
 $service = $services->$id;
 
 // start
-$command = "sudo launchctl load /Library/LaunchAgents/homebrew.mxcl.nginx.plist?" . $id;
+$command = "sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist?" . $id;
 $w->result( "$id-start", $command, "Start {$service->name}", "Will run `$command` for you", "icons/{$service->id}.png" );
 
 // stop
-$command = "sudo launchctl unload /Library/LaunchAgents/homebrew.mxcl.nginx.plist?" . $id;
+$command = "sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist?" . $id;
 $w->result( "{$service->id}-stop", $command, "Stop {$service->name}", "Will run `$command` for you", "icons/{$service->id}.png" );
 
 // restart
-$command = "sudo launchctl unload /Library/LaunchAgents/homebrew.mxcl.nginx.plist"
-		."; sudo launchctl load /Library/LaunchAgents/homebrew.mxcl.nginx.plist?" . $id;
+$command = "sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist"
+		."; sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist?" . $id;
 $w->result( "{$service->id}-restart", $command, "Restart {$service->name}", "Will run `$command` for you", "icons/{$service->id}.png" );
 
 // status
